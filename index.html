@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Webpage with JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Interactive Webpage Example</h1>
+
+    <!-- Simple form -->
+    <form id="myForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <p id="message"></p>
+
+    <button id="clearButton">Clear Form</button>
+
+    <script>
+        // Select the elements
+        const form = document.getElementById('myForm');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageParagraph = document.getElementById('message');
+        const clearButton = document.getElementById('clearButton');
+
+        // Event listener for form submission
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the form from submitting and reloading the page
+
+            // Clear any previous messages
+            messageParagraph.textContent = '';
+
+            // Form validation
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+
+            // Validate the inputs
+            if (name === '') {
+                messageParagraph.textContent = 'Name is required.';
+                messageParagraph.className = 'error';
+            } else if (email === '') {
+                messageParagraph.textContent = 'Email is required.';
+                messageParagraph.className = 'error';
+            } else {
+                messageParagraph.textContent = `Thank you, ${name}! Your email (${email}) has been submitted.`;
+                messageParagraph.className = 'success';
+            }
+        });
+
+        // Event listener for the "Clear Form" button
+        clearButton.addEventListener('click', function () {
+            // Clear the form fields
+            nameInput.value = '';
+            emailInput.value = '';
+            messageParagraph.textContent = '';
+            nameInput.focus(); // Focus the name input field for convenience
+        });
+    </script>
+
+</body>
+</html>
